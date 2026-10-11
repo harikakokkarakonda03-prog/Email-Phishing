@@ -14,6 +14,13 @@ import {
   Lock,
   Send,
   PlayCircle,
+  Puzzle,
+  Download,
+  FolderArchive,
+  ToggleRight,
+  FolderOpen,
+  MailCheck,
+  Sparkles,
 } from 'lucide-react';
 import { NavTab } from '../common/Sidebar';
 
@@ -21,11 +28,13 @@ interface DashboardHomeProps {
   onNavigate: (tab: NavTab) => void;
   onAnalyzeContent: (content: string, sampleName?: string) => void;
   onLoadSample: (sampleType: 'safe' | 'suspicious') => void;
+  onOpenExtensionModal?: () => void;
 }
 
 export const DashboardHome: React.FC<DashboardHomeProps> = ({
   onNavigate,
   onLoadSample,
+  onOpenExtensionModal,
 }) => {
   return (
     <div className="p-6 sm:p-8 lg:p-10 space-y-8 w-full max-w-[1700px] mx-auto animate-fade-in">
@@ -68,7 +77,7 @@ export const DashboardHome: React.FC<DashboardHomeProps> = ({
               <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
                 Analyze - Detect - Report   </p>
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-wrap items-center gap-3">
                 <button
                   onClick={() => onNavigate('analyze')}
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-[#1e60dc] hover:bg-blue-700 text-white font-semibold text-sm shadow-lg shadow-blue-500/25 transition-all cursor-pointer hover:scale-[1.02]"
@@ -76,6 +85,16 @@ export const DashboardHome: React.FC<DashboardHomeProps> = ({
                   <Search className="w-4 h-4 stroke-[2.5]" />
                   <span>Analyze Email</span>
                 </button>
+
+                {onOpenExtensionModal && (
+                  <button
+                    onClick={onOpenExtensionModal}
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-white/90 dark:bg-slate-800/90 hover:bg-blue-50 dark:hover:bg-slate-700 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 font-semibold text-sm shadow-xs transition-all cursor-pointer hover:scale-[1.02]"
+                  >
+                    <Puzzle className="w-4 h-4 text-blue-600 dark:text-blue-400 stroke-[2.2]" />
+                    <span>Get Chrome Extension</span>
+                  </button>
+                )}
               </div>
             </div>
 
@@ -217,6 +236,74 @@ export const DashboardHome: React.FC<DashboardHomeProps> = ({
               <span className="text-orange-600 dark:text-orange-400 text-sm font-semibold flex items-center gap-1 group-hover:translate-x-1.5 transition-transform">
                 <ArrowRight className="w-4 h-4" />
               </span>
+            </div>
+          </div>
+        </div>
+
+        {/* CHROME EXTENSION REAL-TIME SOC SECTION */}
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white p-8 sm:p-10 lg:p-12 shadow-xl border border-blue-800/40">
+          {/* Background Ambient Glow */}
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-10 right-10 w-80 h-80 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div className="space-y-4 max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-semibold">
+                <Sparkles className="w-3.5 h-3.5 text-blue-300" />
+                <span>Real-Time Gmail Protection</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+                ThreatMailer Chrome Extension
+              </h2>
+
+              <p className="text-sm sm:text-base text-blue-100/90 leading-relaxed">
+                Scan suspicious emails automatically right inside your Gmail inbox before clicking phishing links. 
+                Connected live to your cloud forensic analyzer — works on any computer worldwide!
+              </p>
+
+              {/* 4 Steps quick preview */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                <div className="p-3 rounded-xl bg-white/10 backdrop-blur-xs border border-white/10">
+                  <span className="text-[10px] font-bold text-blue-300 uppercase block">Step 1</span>
+                  <span className="text-xs font-semibold text-white">Download .ZIP</span>
+                </div>
+                <div className="p-3 rounded-xl bg-white/10 backdrop-blur-xs border border-white/10">
+                  <span className="text-[10px] font-bold text-blue-300 uppercase block">Step 2</span>
+                  <span className="text-xs font-semibold text-white">chrome://extensions</span>
+                </div>
+                <div className="p-3 rounded-xl bg-white/10 backdrop-blur-xs border border-white/10">
+                  <span className="text-[10px] font-bold text-blue-300 uppercase block">Step 3</span>
+                  <span className="text-xs font-semibold text-white">Developer Mode ON</span>
+                </div>
+                <div className="p-3 rounded-xl bg-white/10 backdrop-blur-xs border border-white/10">
+                  <span className="text-[10px] font-bold text-blue-300 uppercase block">Step 4</span>
+                  <span className="text-xs font-semibold text-white">Load Unpacked</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row lg:flex-col gap-3 w-full lg:w-auto shrink-0">
+              <a
+                href="/email-forensics-extension.zip"
+                download="email-forensics-extension.zip"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-white hover:bg-blue-50 text-blue-900 font-bold text-sm shadow-xl transition-all cursor-pointer hover:scale-[1.02] text-center"
+              >
+                <Download className="w-4 h-4 text-blue-700 stroke-[2.4]" />
+                <span>Download Extension (.ZIP)</span>
+              </a>
+
+              {onOpenExtensionModal && (
+                <button
+                  onClick={onOpenExtensionModal}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold text-xs backdrop-blur-xs transition-all cursor-pointer hover:scale-[1.02]"
+                >
+                  <Puzzle className="w-4 h-4 text-blue-300" />
+                  <span>View Step-by-Step Guide</span>
+                </button>
+              )}
             </div>
           </div>
         </div>

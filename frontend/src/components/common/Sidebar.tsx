@@ -9,6 +9,7 @@ import {
   Mail,
   Sun,
   Moon,
+  Puzzle,
 } from 'lucide-react';
 
 export type NavTab = 'home' | 'analyze' | 'intelligence' | 'reports' | 'about';
@@ -20,6 +21,7 @@ interface SidebarProps {
   onToggleTheme: () => void;
   isOpenMobile?: boolean;
   onCloseMobile?: () => void;
+  onOpenExtensionModal?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -29,6 +31,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onToggleTheme,
   isOpenMobile = false,
   onCloseMobile,
+  onOpenExtensionModal,
 }) => {
   const navItems = [
     { id: 'home' as NavTab, label: 'Home', icon: Home },
@@ -136,6 +139,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
               Safer You.
             </p>
+
+            {onOpenExtensionModal && (
+              <button
+                onClick={onOpenExtensionModal}
+                className="mt-3.5 w-full py-2 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-xs transition-all cursor-pointer hover:scale-[1.02]"
+              >
+                <Puzzle className="w-3.5 h-3.5" />
+                <span>Chrome Extension</span>
+              </button>
+            )}
 
             <div className="mt-3 pt-3 border-t border-blue-100/60 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
               <span className="flex items-center gap-1.5 font-medium">

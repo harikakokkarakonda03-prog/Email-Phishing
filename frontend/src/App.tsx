@@ -10,6 +10,7 @@ import { ScanningProgressModal } from './components/investigation/ScanningProgre
 import { EmailUploadModal } from './components/investigation/EmailUploadModal';
 import { ThreatIntelligenceView } from './components/intelligence/ThreatIntelligenceView';
 import { LoginScreen } from './components/auth/LoginScreen';
+import { ExtensionModal } from './components/extension/ExtensionModal';
 
 import { InvestigationData } from './types/forensic';
 import { DEMO_INVESTIGATION, SAFE_INVESTIGATION } from './data/demoInvestigation';
@@ -88,6 +89,7 @@ export function App() {
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isScanningOpen, setIsScanningOpen] = useState(false);
   const [isReportOpen, setIsReportOpen] = useState(false);
+  const [isExtensionModalOpen, setIsExtensionModalOpen] = useState(false);
 
   // Error message shown at the top of the screen
   const [notice, setNotice] = useState<string | null>(null);
@@ -202,6 +204,7 @@ export function App() {
         onToggleTheme={toggleTheme}
         isOpenMobile={isMobileSidebarOpen}
         onCloseMobile={() => setIsMobileSidebarOpen(false)}
+        onOpenExtensionModal={() => setIsExtensionModalOpen(true)}
       />
 
       {/* Logout button */}
@@ -246,6 +249,7 @@ export function App() {
             }}
             onAnalyzeContent={handleStartAnalysis}
             onLoadSample={handleLoadSample}
+            onOpenExtensionModal={() => setIsExtensionModalOpen(true)}
           />
         )}
 
@@ -340,6 +344,11 @@ export function App() {
         isOpen={isReportOpen}
         onClose={() => setIsReportOpen(false)}
         investigation={activeInvestigation}
+      />
+
+      <ExtensionModal
+        isOpen={isExtensionModalOpen}
+        onClose={() => setIsExtensionModalOpen(false)}
       />
     </div>
   );
