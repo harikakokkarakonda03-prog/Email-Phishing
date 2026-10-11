@@ -1,0 +1,23 @@
+body { font-family: Arial; padding: 0 15px; }
+
+/* Each page has its own width; the class is set on <body> in the HTML */
+body.login { max-width: 360px; margin: 80px auto; }
+body.dash { max-width: 950px; margin: 30px auto; }
+
+/* Login page */
+input { width: 100%; padding: 10px; margin: 6px 0; box-sizing: border-box; }
+#msg { color: #c0392b; }
+
+/* Buttons used on both pages */
+button, .btn { background: #2c3e50; color: white; border: 0; border-radius: 6px;
+               cursor: pointer; text-decoration: none; display: inline-block; }
+.login button { padding: 10px 16px; margin-right: 6px; }
+.btn { padding: 8px 14px; }
+
+/* Dashboard page */
+.box { border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin: 15px 0; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid #eee; }
+.row { display: flex; gap: 20px; flex-wrap: wrap; }
+.row .box { flex: 1; min-width: 300px; }
+input[type="checkbox"] { width: auto; margin-right: 6px; }

@@ -1,0 +1,82 @@
+<html><head><title>Email Forensics Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="/static/style.css">
+</head><body class="dash">
+<h1>Email Forensics Dashboard <button class="btn" onclick="logout()">Logout</button></h1>
+
+<div class="row">
+  <div class="box"><h3>Threats by type</h3><canvas id="c1"></canvas></div>
+  <div class="box"><h3>Threats by day</h3><canvas id="c2"></canvas></div>
+</div>
+
+<div class="box">
+  <h3>Scan history</h3>
+  <p><button class="btn" onclick="downloadCsv()">Download history (CSV)</button></p>
+  <table>
+    <thead><tr><th>ID</th><th>Date</th><th>Subject</th><th>Danger</th><th>Verdict</th><th>Report</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+</div>
+
+<script>
+const token = localStorage.getItem("token");
+if (!token) location.href = "/login-page";  // not logged in -> go to login
+
+function logout() { localStorage.removeItem("token"); location.href = "/login-page"; }
+
+// Every API call sends the token. A 401 means the login expired.
+function api(url) {
+  return fetch(url, { headers: { Authorization: "Bearer " + token } }).then(r => {
+    if (r.status === 401) { logout(); }
+    return r;
+  });
+}
+
+function downloadCsv() {
+  api("/export/csv").then(r => r.blob()).then(b => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(b);
+    a.download = "scan_history.csv";
+    a.click();
+  });
+}
+
+function cell(tr, text) {
+  const td = document.createElement("td");
+  td.textContent = text;
+  tr.appendChild(td);
+}
+
+api("/stats").then(r => r.json()).then(s => {
+  new Chart(document.getElementById("c1"), {
+    type: "bar",
+    data: { labels: Object.keys(s.by_verdict),
+            datasets: [{ label: "Emails", data: Object.values(s.by_verdict) }] }
+  });
+  new Chart(document.getElementById("c2"), {
+    type: "line",
+    data: { labels: Object.keys(s.threats_by_day),
+            datasets: [{ label: "Threats", data: Object.values(s.threats_by_day) }] }
+  });
+});
+
+api("/scans").then(r => r.json()).then(list => {
+  const body = document.getElementById("rows");
+  list.forEach(x => {
+    const tr = document.createElement("tr");
+    cell(tr, x.id);
+    cell(tr, x.created_at.slice(0, 16).replace("T", " "));
+    cell(tr, x.subject);
+    cell(tr, x.danger_percent + "%");
+    cell(tr, x.verdict);
+    const td = document.createElement("td");
+    const a = document.createElement("a");
+    a.href = "/reports/" + x.id + "?token=" + token;  // report page needs the token too
+    a.textContent = "View";
+    td.appendChild(a);
+    tr.appendChild(td);
+    body.appendChild(tr);
+  });
+});
+</script>
+</body></html>

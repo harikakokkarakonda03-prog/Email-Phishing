@@ -1,0 +1,35 @@
+<html><head><title>Login</title>
+<link rel="stylesheet" href="/static/style.css">
+</head><body class="login">
+<h2>Email Forensics</h2>
+<input id="email" type="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password (8+ characters)">
+<label><input type="checkbox" onclick="togglePassword(this)"> Show password</label><br>
+<small>Use capital and small letters, a number, and a symbol.</small>
+<button onclick="go('/login')">Login</button>
+<button onclick="go('/register')">Register</button>
+<p id="msg"></p>
+<script>
+    // Switches the password box between hidden dots and visible text
+function togglePassword(box) {
+  document.getElementById("password").type = box.checked ? "text" : "password";
+}
+function go(path) {
+  fetch(path, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: document.getElementById("email").value,
+      password: document.getElementById("password").value
+    })
+  }).then(r => r.json()).then(d => {
+    if (d.token) {
+      localStorage.setItem("token", d.token);  // the browser remembers the login
+      location.href = "/dashboard";
+    } else {
+      document.getElementById("msg").textContent = d.detail || "Something went wrong";
+    }
+  });
+}
+</script>
+</body></html>

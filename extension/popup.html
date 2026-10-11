@@ -1,0 +1,23 @@
+<html><head><style>
+  body { font-family: Arial; width: 260px; padding: 12px; }
+  input { width: 100%; padding: 8px; margin: 4px 0; box-sizing: border-box; }
+  button { padding: 8px 14px; background: #2c3e50; color: white; border: 0; border-radius: 6px; cursor: pointer; }
+  #msg { color: #c0392b; font-size: 13px;
+   }
+     input[type="checkbox"] { width: auto; margin-right: 6px; }
+</style></head><body>
+<h3>Email Forensics</h3>
+<div id="loginBox">
+  <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+  <label><input id="showPw" type="checkbox"> Show password</label><br><br>
+  <button id="loginBtn">Login</button>
+  <p><small>No account? Register at http://localhost:5173</small></p>
+</div>
+<div id="doneBox" style="display:none">
+  <p>You are logged in. Emails you open in Gmail are scanned automatically.</p>
+  <button id="logoutBtn">Logout</button>
+</div>
+<p id="msg"></p>
+<script src="popup.js"></script>
+</body></html>

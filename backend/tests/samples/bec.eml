@@ -1,0 +1,11 @@
+Received: from smtp.freemail-host.top ([91.219.236.18]) by mx.company.com; Sat, 10 Oct 2026 10:00:00 +0000
+From: "Microsoft Security Team" <helpdesk@randomhost.top>
+Reply-To: billing-dept@yahoo.com
+Return-Path: <bounce@spam-host.ru>
+Subject: Action required: unauthorized sign-in
+Date: Sat, 10 Oct 2026 10:00:00 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<p>Unauthorized sign-in detected. Action required within 24 hours.</p>
+<p><a href="http://login-verify.randomhost.top/microsoft/login">https://www.microsoft.com/account</a></p>

@@ -1,0 +1,24 @@
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41]) by mx.google.com with SMTPS id abc; Sat, 10 Oct 2026 10:00:03 -0700 (PDT)
+Received: from [192.168.1.5] (unknown [49.37.12.9]) by smtp.example.edu (Postfix) with ESMTP; Sat, 10 Oct 2026 10:00:01 +0000
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@example.edu header.s=selector1 header.b=abc;
+       spf=pass (google.com: domain of a@example.edu designates 49.37.12.9 as permitted sender) smtp.mailfrom=a@example.edu;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=example.edu
+From: "Priya R" <a@example.edu>
+To: me@gmail.com
+Subject: Notes
+Date: Sat, 10 Oct 2026 10:00:00 +0000
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="b1"
+
+--b1
+Content-Type: text/html; charset=utf-8
+
+<p>See <a href="https://drive.google.com/file/d/1">notes</a></p>
+--b1
+Content-Type: application/octet-stream; name="invoice.pdf.exe"
+Content-Disposition: attachment; filename="invoice.pdf.exe"
+Content-Transfer-Encoding: base64
+
+SGVsbG8=
+--b1--

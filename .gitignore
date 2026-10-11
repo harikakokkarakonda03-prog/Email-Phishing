@@ -1,0 +1,44 @@
+# Python virtual environments
+venv/
+.venv/
+ENV/
+env/
+backend/venv/
+backend/.venv/
+
+# Python bytecode & cache
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+
+# Databases & local storage
+*.db
+backend/*.db
+backend/forensics.db
+
+# Frontend dependencies and builds
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+dist-ssr/
+build/
+.npm
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+frontend/.env.local
+
+# Operating system files
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+
+# IDE & Editor settings
+.vscode/
+.idea/
