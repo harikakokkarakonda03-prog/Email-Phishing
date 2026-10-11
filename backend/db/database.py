@@ -1,8 +1,10 @@
+import os
 import json
 import sqlite3
 from datetime import datetime
+from pathlib import Path
 
-DB = "forensics.db"
+DB = os.environ.get("DB_PATH", str(Path(__file__).resolve().parent.parent / "forensics.db"))
 
 def get_conn():
     conn = sqlite3.connect(DB)

@@ -53,6 +53,18 @@ def current_user(authorization: str = Header(None), token: str = None):
     if not user_id:
         raise HTTPException(401, "Please log in")
     return user_id
+# ---------- Health & Root ----------
+
+@app.get("/")
+def root():
+    return {"status": "ok", "service": "Email Forensics API", "docs": "/docs"}
+
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
+
+
 # ---------- Pages ----------
 
 @app.get("/login-page", response_class=HTMLResponse)
