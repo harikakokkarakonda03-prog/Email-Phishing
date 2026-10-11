@@ -1,5 +1,5 @@
-const API = "http://127.0.0.1:8000";       // the Python backend
-const FRONTEND = "http://localhost:5173";  // the ThreatMailer website. When you deploy it, put its https link here.
+const API = "https://email-phishing-ae8j.onrender.com";       // live Render backend
+const FRONTEND = "https://email-phishing-dun.vercel.app";  // live Vercel frontend
 const ALERT_FROM = 31;                     // threat score from which an alert is shown
 const CACHE_MS = 24 * 3600 * 1000;         // an email opened again within 24 hours is not scanned twice
 

@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:8000";
+const API = "https://email-phishing-ae8j.onrender.com";
 
 function show(loggedIn) {
   document.getElementById("loginBox").style.display = loggedIn ? "none" : "block";
